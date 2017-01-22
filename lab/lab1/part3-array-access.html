@@ -69,15 +69,20 @@
       ext: 'png'
     }).addTo(map);
 
-    /* =====================
+    var restaurant1 = [39.954042, -75.196262,'the Pod']
+    var restaurant2 = [39.953376, -75.193451,'Mad Mex']
+    var restaurant3 = [39.955335, -75.198071,'Cafe Bene']
+    var restaurantData = [restaurant1,restaurant2,restaurant3]
+    console.log(restaurantData)
 
-    Start code
+    // Part 3
+    restaurantData.push([39.953057, -75.204830,'Ramen Bar']);
+    restaurantData.push([39.953921, -75.211654,'Green Line Cafe']);
+    console.log(restaurantData);
 
-    ===================== */
-
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    for (var i = 0; i < restaurantData.length; i++){
+      L.marker(restaurantData[i]).addTo(map).bindPopup(restaurantData[i][2]).openPopup();;
+    }
 
     /* =====================
 

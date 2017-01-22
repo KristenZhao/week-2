@@ -42,7 +42,7 @@
           console.log("Not sure how to proceed with value:", arrayValue)
         }
       }
-
+      //console.log(exampleSum);
       /* =====================
 
       Start your code below
@@ -66,15 +66,27 @@
       //  works! You should see 'Success: true' if all goes well.
 
       /* Define your function here */
+      function sum(anArray){
+        for (var i = 0; i < anArray.length; i++) {
+          var arrayValue2 = anArray[i]
+          if (typeof arrayValue2 === 'string') {         // String case
+            yourSum = yourSum + arrayValue2.length
+          } else if (typeof arrayValue2 === 'number') {  // Number case
+            yourSum = yourSum + arrayValue2
+          } else {                                      // Otherwise
+            console.log("Not sure how to proceed with value:", arrayValue2)
+          }
+        } return yourSum
+      }
 
-      for (var i = 0; i < theArray.length, i++) { /* Inside the loop*/ }
+      console.log(sum(theArray));
 
       /* =====================
 
       End code
 
       ===================== */
-      console.log("Success: ", yourSum === 169)
+      console.log("Success: ", yourSum === 169);
     </script>
   </body>
 </html>
