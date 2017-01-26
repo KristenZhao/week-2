@@ -39,11 +39,14 @@
 
        This week's assignment as having two separate parts:
 
-       1. Log a series of arrays to the console that represents the health_centers dataset in array form. For example, [{'first': 1, 'second': 44}, {'first': 2, 'second': 12}] becomes [['first','second'],[1, 44],[2, 12]]
+       1. Log a series of arrays to the console that represents the health_centers dataset in array form.
+       For example, [{'first': 1, 'second': 44}, {'first': 2, 'second': 12}] becomes [['first','second'],[1, 44],[2, 12]]
 
-       2. Put a marker on the map for each health center in the specified lat/lng coordinates with a popup (a simple text dialog) that shows that location's name when its marker is clicked.
+       2. Put a marker on the map for each health center in the specified lat/lng coordinates with a popup
+       (a simple text dialog) that shows that location's name when its marker is clicked.
 
-       EXTRA: Some of these locations offer dental services as well. Can you find some way to give dental locations a different icon? (Here's some relevant documentation: http://leafletjs.com/reference.html#icon)
+       EXTRA: Some of these locations offer dental services as well. Can you find some way to give dental
+       locations a different icon? (Here's some relevant documentation: http://leafletjs.com/reference.html#icon)
 
        Remember: functions are meant to facilitate code comprehension and reuse. Try to use them to organize your code.
       ===================== */
@@ -54,11 +57,56 @@
       Start code
 
       ===================== */
+      // Part 1 --------------------------------------------------------
+      var mapNames = Object.keys(healthCenters[0]); // first item in array is the keys of each health center
+      var hcArray = [mapNames];                     // start the health center array by first include the keys
+      console.log(hcArray);                         // print it to verify it is functioning properly
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var objValues = function(object){             // this function loops through an array and find the values corresponding
+        for (var i in object){                      // to each key
+          var hCValue = [];                         // hcValue is the corresponding value to each key
+          for (var key in object[i]){
+            //console.log(object[i][key]);
+            hCValue.push(object[i][key]);
+          }
+          //console.log(hCValue);
+          hcArray.push(hCValue);
+        }
+        return hcArray;
+      }
 
+      objValues(healthCenters);                     // getting the desired form as the instruction commanded
 
-      var addMarkers = function(map) {};
+      // var jsonToCsv = function(json) { console.log(json); };
+      // //jsonToCsv(healthCenters);
+
+      // Part 2 ----------------------------------------------------------------------
+      //console.log(hcArray[1]);
+      var addMarkers = function(map) {
+        for (var i in hcArray){                     // ??? why var in in hcArray is only the index, not the actual sub-array???
+          //console.log(hcArray[location]);
+          if (typeof hcArray[i][0] === 'number' && typeof hcArray[i][1] === 'number'){
+            L.marker([hcArray[i][1],hcArray[i][0]]).addTo(map).bindPopup(hcArray[i][3] + ': \n' + hcArray[i][9]).openPopup();
+          } else {
+            continue;
+          }
+        }
+      };
+
+      // Bonus --------------------------------------------------------------------------
+      // var myIcon = L.icon({
+      //   iconUrl: 'Location_Icon.png'
+      // })
+      //
+      // //console.log(hcArray.length);
+      // var dental = function(map){
+      //   for (var i = 1, i < hcArray.length,i++) {
+      //     if (hcArray[i][8] !== 'N/A'){
+      //       console.log(hcArray[i]);
+      //       //L.marker([hcArray[i][1],hcArray[i][0]],{icon:myIcon}).addTo(map);
+      //     }
+      //   }
+
 
       /* =====================
 
@@ -67,8 +115,9 @@
       ===================== */
 
 
-      jsonToCsv(healthCenters);
+      // jsonToCsv(healthCenters);
       addMarkers(map);
+      // dental(map);
     </script>
     <!--Your code ends here-->
   </body>
